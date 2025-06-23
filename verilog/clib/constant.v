@@ -1,4 +1,12 @@
 /*
+    floating point data formats
+*/
+
+`define FP32 0
+`define FP16 1
+
+
+/*
     special values
 */
 
@@ -18,17 +26,21 @@
     bit segment for floating point numbers
 */
 
+`define FP32_LEN 32
 `define FP32_EXP_LEN 8
 `define FP32_MANTISSA_LEN 23
 
+`define FP16_LEN 16
 `define FP16_EXP_LEN 5
 `define FP16_MANTISSA_LEN 10
 
+`define FP32_SIGN_BIT 31
 `define FP32_EXP_HIGH 30
 `define FP32_EXP_LOW 23
 `define FP32_MANTISSA_HIGH 22
 `define FP32_MANTISSA_LOW 0
 
+`define FP16_SIGN_BIT 15
 `define FP16_EXP_HIGH 14
 `define FP16_EXP_LOW 10
 `define FP16_MANTISSA_HIGH 9
