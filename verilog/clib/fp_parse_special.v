@@ -7,7 +7,6 @@ module parse_special #(
 );
     
     // data format bit segments
-    localparam sign_bit = `GET_SIGN_BIT(data_format);
     localparam exp_high = `GET_EXP_HIGH(data_format);
     localparam exp_low = `GET_EXP_LOW(data_format);
     localparam exp_len = `GET_EXP_LEN(data_format);
