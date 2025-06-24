@@ -1,3 +1,8 @@
+/*
+    the first stage for floating point adder
+        * arbitrate whether there is any special value
+*/
+
 module parse_special #(
     parameter data_format = `FP32
 ) (

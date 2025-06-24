@@ -1,3 +1,10 @@
+/*
+    the second stage for floating point adder
+        * find the larger exponent segment
+        * pre-calculate the sign bit (the larger exponent's sign bit)
+        * right-shift the mantissa segment with the smaller exponent
+*/
+
 module mantissa_align #(
     parameter data_format = `FP32
 ) (

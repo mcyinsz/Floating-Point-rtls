@@ -1,3 +1,9 @@
+/*
+    the third stage for floating point 
+        * get the final sign bit
+        * do the mantissa calculation
+*/
+
 module mantissa_cal #(
     parameter data_format = `FP32
 ) (
