@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'parse_special'
+    top_module = 'mantissa_align'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)

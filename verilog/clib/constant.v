@@ -45,3 +45,10 @@
 `define FP16_EXP_LOW 10
 `define FP16_MANTISSA_HIGH 9
 `define FP16_MANTISSA_LOW 0
+
+/*
+    protection bits
+*/
+
+`define FP16_PROTECT_LEN 1
+`define FP32_PROTECT_LEN 3
