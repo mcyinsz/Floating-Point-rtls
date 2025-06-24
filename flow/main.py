@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'mantissa_cal'
+    top_module = 'standardizing'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)
