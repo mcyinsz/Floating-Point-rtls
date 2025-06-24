@@ -5,9 +5,11 @@ module mantissa_align #(
     input wire [`GET_FP_LEN(data_format) - 1 : 0] a,
     input wire [`GET_FP_LEN(data_format) - 1 : 0] b,
     output wire sign,                                                                              // aligned sign
+    output wire a_sign,
+    output wire b_sign,
     output wire [`GET_EXP_LEN(data_format) - 1:0] exp,                                             // shared exponent
-    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_a, // larger mantissa
-    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_b // smaller mantissa
+    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_a, // mantissa with the larger exponent
+    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_b  // mantissa with the lower exponent
 
 );
     // local params
@@ -20,8 +22,6 @@ module mantissa_align #(
     localparam protect_len = `GET_PROTECT_LEN(data_format);
 
     // sign bit
-    wire a_sign;
-    wire b_sign;
     assign a_sign = a[`GET_SIGN_BIT(data_format)];
     assign b_sign = b[`GET_SIGN_BIT(data_format)];
 

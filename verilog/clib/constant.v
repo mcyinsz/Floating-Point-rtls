@@ -52,3 +52,10 @@
 
 `define FP16_PROTECT_LEN 1
 `define FP32_PROTECT_LEN 3
+
+/*
+    effetive operation (add 1'b0, sub 1'b1)
+*/
+
+`define ADD 1'b0
+`define SUB 1'b1
