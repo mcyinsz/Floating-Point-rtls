@@ -50,7 +50,7 @@
     protection bits
 */
 
-`define FP16_PROTECT_LEN 1
+`define FP16_PROTECT_LEN 3
 `define FP32_PROTECT_LEN 3
 
 /*

@@ -5,32 +5,33 @@
         * right-shift the mantissa segment with the smaller exponent
 */
 
-module mantissa_align #(
+module fp_mantissa_align #(
     parameter data_format = `FP32
 ) (
     
-    input wire [`GET_FP_LEN(data_format) - 1 : 0] a,
-    input wire [`GET_FP_LEN(data_format) - 1 : 0] b,
-    output wire sign,                                                                              // aligned sign
+    input wire [(`GET_FP_LEN(data_format)) - 1 : 0] a,
+    input wire [(`GET_FP_LEN(data_format)) - 1 : 0] b,
     output wire a_sign,
     output wire b_sign,
-    output wire [`GET_EXP_LEN(data_format) - 1:0] exp,                                             // shared exponent
-    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_a, // mantissa with the larger exponent
-    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant_b  // mantissa with the lower exponent
+    output wire [(`GET_EXP_LEN(data_format)) - 1:0] exp,                                             // shared exponent
+    output wire [(`GET_MANTISSA_LEN(data_format)) + (`GET_PROTECT_LEN(data_format)) + 1 - 1:0] mant_a, // mantissa with the larger exponent
+    output wire [(`GET_MANTISSA_LEN(data_format)) + (`GET_PROTECT_LEN(data_format)) + 1 - 1:0] mant_b  // mantissa with the lower exponent
 
 );
     // local params
-    localparam exp_high = `GET_EXP_HIGH(data_format);
-    localparam exp_low = `GET_EXP_LOW(data_format);
-    localparam mantissa_high = `GET_MANTISSA_HIGH(data_format);
-    localparam mantissa_low = `GET_MANTISSA_LOW(data_format);
-    localparam mantissa_len = `GET_MANTISSA_LEN(data_format);
-    localparam exp_len = `GET_EXP_LEN(data_format);
-    localparam protect_len = `GET_PROTECT_LEN(data_format);
+    parameter exp_high = `GET_EXP_HIGH(data_format);
+    parameter exp_low = `GET_EXP_LOW(data_format);
+    parameter mantissa_high = `GET_MANTISSA_HIGH(data_format);
+    parameter mantissa_low = `GET_MANTISSA_LOW(data_format);
+    parameter mantissa_len = `GET_MANTISSA_LEN(data_format);
+    parameter exp_len = `GET_EXP_LEN(data_format);
+    parameter protect_len = `GET_PROTECT_LEN(data_format);
 
     // sign bit
-    assign a_sign = a[`GET_SIGN_BIT(data_format)];
-    assign b_sign = b[`GET_SIGN_BIT(data_format)];
+    wire original_a_sign;
+    wire original_b_sign;
+    assign original_a_sign = a[`GET_SIGN_BIT(data_format)];
+    assign original_b_sign = b[`GET_SIGN_BIT(data_format)];
 
     // exp bits
     wire [exp_len - 1:0] a_exp;
@@ -48,7 +49,6 @@ module mantissa_align #(
     wire a_large;
     assign a_large = (a_exp > b_exp) || (a_exp == b_exp && a_frac > b_frac);
     assign exp = (a_large) ? a_exp : b_exp;
-    assign sign = (a_large) ? a_sign : b_sign;
 
     // extend mantissa value (prefix 1'b1 and protect bits)
     wire [mantissa_len + protect_len + 1 - 1:0] a_mant;
@@ -65,5 +65,7 @@ module mantissa_align #(
     // align mantissa bits
     assign mant_a = (a_large) ? a_mant : b_mant;
     assign mant_b = (a_large) ? (b_mant >> exp_diff) : (a_mant >> exp_diff);
+    assign a_sign = (a_large) ? original_a_sign : original_b_sign;
+    assign b_sign = (a_large) ? original_b_sign : original_a_sign;
 
 endmodule

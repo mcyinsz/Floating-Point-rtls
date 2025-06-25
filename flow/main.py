@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'standardizing'
+    top_module = 'fp_round'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)

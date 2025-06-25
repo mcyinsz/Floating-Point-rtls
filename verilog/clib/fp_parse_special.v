@@ -3,15 +3,16 @@
         * arbitrate whether there is any special value
 */
 
-module parse_special #(
+module fp_parse_special #(
     parameter data_format = `FP32
 ) (
-    input wire [`GET_FP_LEN(data_format)-1:0] a,
-    input wire [`GET_FP_LEN(data_format)-1:0] b,
+    input wire [(`GET_FP_LEN(data_format))-1:0] a,
+    input wire [(`GET_FP_LEN(data_format))-1:0] b,
     output reg [1:0] special 
 );
     
     // data format bit segments
+    localparam sign_bit = (`GET_FP_LEN(data_format)) - 1;
     localparam exp_high = `GET_EXP_HIGH(data_format);
     localparam exp_low = `GET_EXP_LOW(data_format);
     localparam exp_len = `GET_EXP_LEN(data_format);
@@ -23,7 +24,7 @@ module parse_special #(
         if (is_nan(a) || is_nan(b)) begin
             special = `NAN;
         end else if (is_inf(a) && is_inf(b)) begin
-            special = (a[`GET_FP_LEN(data_format) - 1] == b[`GET_FP_LEN(data_format) - 1]) ? `INF : `NAN;
+            special = (a[sign_bit] == b[sign_bit]) ? `INF : `NAN;
         end else if (is_inf(a) || is_inf(b)) begin
             special = `INF;
         end else if (is_zero(a) && is_zero(b)) begin
@@ -49,9 +50,9 @@ module parse_special #(
     endfunction
 
     function is_zero;
-        input [`GET_FP_LEN(data_format) - 1:0] val;
+        input [`GET_FP_LEN(data_format) - 2:0] val; // skip sign bit
         begin
-            is_zero = (val[`GET_FP_LEN(data_format) - 1 : 0] == 0);
+            is_zero = (val[`GET_FP_LEN(data_format) - 2 : 0] == 0);
         end
     endfunction
 

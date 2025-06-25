@@ -5,18 +5,18 @@
             * the actual operation is subtract, and there is at least 1 leading zero: require left shift the mantissa and subtract exponent value
 */
 
-module standardizing #(
+module fp_standardizing #(
     parameter data_format = `FP32
 ) (
-    input wire [`GET_EXP_LEN(data_format) - 1 : 0] exp, // exponent segment after stage 1,2,3
-    input wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 2 - 1 : 0] cal_result, // calculated mantissa result
+    input wire [(`GET_EXP_LEN(data_format)) - 1 : 0] exp, // exponent segment after stage 1,2,3
+    input wire [(`GET_MANTISSA_LEN(data_format)) + (`GET_PROTECT_LEN(data_format)) + 2 - 1 : 0] cal_result, // calculated mantissa result
     input wire effective_op,        // can be `ADD or `SUB
-    output wire [`GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1 - 1:0] mant,
-    output wire [`GET_EXP_LEN(data_format) - 1 : 0] standardizing_exp
+    output wire [(`GET_MANTISSA_LEN(data_format)) + (`GET_PROTECT_LEN(data_format)) + 1 - 1:0] mant,
+    output wire [(`GET_EXP_LEN(data_format)) - 1 : 0] standardizing_exp
 );
 
     // local parameters
-    localparam aligned_mantissa_length = `GET_MANTISSA_LEN(data_format) + `GET_PROTECT_LEN(data_format) + 1;
+    localparam aligned_mantissa_length = (`GET_MANTISSA_LEN(data_format)) + (`GET_PROTECT_LEN(data_format)) + 1;
     localparam aligned_mantissa_with_carry_length = aligned_mantissa_length + 1;
 
     // calculate how many zeros is on the high bit
