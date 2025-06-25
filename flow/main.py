@@ -43,8 +43,8 @@ def get_design_config(
 
     # all the verilog files
     common_dir = os.path.join(VERILOG_DIR, 'clib')
-    adder_dir = os.path.join(VERILOG_DIR, 'adder')
-    verilog_files = get_file_paths(common_dir)
+    adder_dir = os.path.join(VERILOG_DIR, 'arithmetic')
+    verilog_files = get_file_paths(common_dir) + get_file_paths(adder_dir)
     
     # assure that the constants/utils would be firstly compiled
     specified_files = [os.path.join(common_dir,"constant.v"),os.path.join(common_dir,"fp_params.vh")]
@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'fp_round'
+    top_module = 'fp32_naive_adder'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)
