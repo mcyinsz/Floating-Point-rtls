@@ -1,3 +1,6 @@
 [submodule "3rd/dacs"]
 	path = 3rd/dacs
 	url = https://github.com/mcyinsz/dacs-lab.git
+[submodule "3rd/fpu"]
+	path = 3rd/fpu
+	url = https://github.com/dawsonjon/fpu.git
