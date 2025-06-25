@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'fp32_naive_multiplier'
+    top_module = 'fp32_naive_adder'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)

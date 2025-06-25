@@ -6,7 +6,7 @@ import sys
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_DIR)
 
-DACS_DIR = os.path.join(ROOT_DIR, "dacs")
+DACS_DIR = os.path.join(ROOT_DIR, "3rd/dacs")
 
 VERILOG_DIR = os.path.join(ROOT_DIR, "verilog")
 
