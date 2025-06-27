@@ -53,14 +53,18 @@ module fp_standardizing #(
     wire [$clog2(aligned_mantissa_length) - 1:0] shift_amt;
     assign shift_amt = (leading_zeros_count > exp)? exp[$clog2(aligned_mantissa_length+1)-1:0] : leading_zeros_count;
     
+    // normalized to nonormalized
+    wire nonormalized;
+    assign nonormalized = (shift_amt == exp);
+
     // exponent change (+1: for carry bit in add operation; -shift_amt: for leading zero shifting)
     assign standardizing_exp = (add_carry)? exp + 1:
                                 (sub_lz)? exp - shift_amt:
                                 exp;
 
     // mantissa change
-    assign mant = (add_carry)? cal_result[aligned_mantissa_with_carry_length - 1: 1] :
-                    (sub_lz)? cal_result[aligned_mantissa_with_carry_length - 2: 0] << shift_amt:
+    assign mant = (add_carry && exp != 0)? cal_result[aligned_mantissa_with_carry_length - 1: 1] :
+                    (sub_lz)? (nonormalized? cal_result[aligned_mantissa_with_carry_length - 2: 0] << shift_amt - 1 : cal_result[aligned_mantissa_with_carry_length - 2: 0] << shift_amt):
                     cal_result[aligned_mantissa_with_carry_length - 2: 0];
 
 endmodule
