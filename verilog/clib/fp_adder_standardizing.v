@@ -5,7 +5,7 @@
             * the actual operation is subtract, and there is at least 1 leading zero: require left shift the mantissa and subtract exponent value
 */
 
-module fp_standardizing #(
+module fp_adder_standardizing #(
     parameter data_format = `FP32
 ) (
     input wire [(`GET_EXP_LEN(data_format)) - 1 : 0] exp, // exponent segment after stage 1,2,3

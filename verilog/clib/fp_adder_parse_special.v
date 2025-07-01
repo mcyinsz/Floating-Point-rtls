@@ -3,7 +3,7 @@
         * arbitrate whether there is any special value
 */
 
-module fp_parse_special #(
+module fp_adder_parse_special #(
     parameter data_format = `FP32
 ) (
     input wire [(`GET_FP_LEN(data_format))-1:0] a,

@@ -4,7 +4,7 @@
         * do the mantissa calculation
 */
 
-module fp_mantissa_cal #(
+module fp_adder_mantissa_cal #(
     parameter data_format = `FP32
 ) (
     input wire a_sign, // sign from the original value with the larger exponent

@@ -5,7 +5,7 @@
         * right-shift the mantissa segment with the smaller exponent
 */
 
-module fp_mantissa_align #(
+module fp_adder_mantissa_align #(
     parameter data_format = `FP32
 ) (
     

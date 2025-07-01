@@ -77,7 +77,7 @@ module fp_pipeline_adder #(
     wire stage_4_valid;  // stage 4 -> output
 
     // stage 1: parse_special
-    fp_parse_special #(
+    fp_adder_parse_special #(
         .data_format(data_format)
     ) stage_1 (
         .a(a),
@@ -127,7 +127,7 @@ module fp_pipeline_adder #(
     );
 
     // stage 2: mantissa align
-    fp_mantissa_align #(
+    fp_adder_mantissa_align #(
         .data_format(data_format)
     ) stage_2 (
         .a(stage_1_a_q),
@@ -213,7 +213,7 @@ module fp_pipeline_adder #(
     );
 
     // stage 3: mantissa calculation
-    fp_mantissa_cal #(
+    fp_adder_mantissa_cal #(
         .data_format(data_format)
     ) stage_3 (
         .a_sign(stage_2_largeexp_sign_q),
@@ -290,7 +290,7 @@ module fp_pipeline_adder #(
     );
 
     // stage 4: standardizing
-    fp_standardizing #(
+    fp_adder_standardizing #(
         .data_format(data_format)
     ) stage_4 (
         .exp(stage_3_exp_q),
@@ -355,7 +355,7 @@ module fp_pipeline_adder #(
     );
 
     // stage 5: round
-    fp_round #(
+    fp_adder_round #(
         .data_format(data_format)
     ) stage_5 (
         .special(stage_4_special_q),

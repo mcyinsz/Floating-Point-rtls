@@ -1,4 +1,4 @@
-module fp_round #(
+module fp_adder_round #(
     parameter data_format = `FP32
 ) (
     input wire [1:0] special,
