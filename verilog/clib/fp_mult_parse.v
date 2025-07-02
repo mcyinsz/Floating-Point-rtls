@@ -36,13 +36,13 @@ module fp_mult_parse #(
 
     // frac segment
     // TODO: deal with non-normalized format
-    assign a_frac = (|a[exp_high : exp_low])? {1'b1, a[mant_high, mant_low]} : 24'b0;
-    assign b_frac = (|b[exp_high : exp_low])? {1'b1, b[mant_high, mant_low]} : 24'b0;
+    assign a_frac = (|a[exp_high : exp_low])? {1'b1, a[mant_high: mant_low]} : 24'b0;
+    assign b_frac = (|b[exp_high : exp_low])? {1'b1, b[mant_high: mant_low]} : 24'b0;
 
     // special value detection
     assign a_zero = (a[exp_high : mant_low] == 0);
     assign b_zero = (b[exp_high : mant_low] == 0);
-    assign a_inf = (&a[exp_high : exp_low]) && (a[mant_high, mant_low] == 0);
-    assign b_inf = (&b[exp_high : exp_low]) && (b[mant_high, mant_low] == 0);
+    assign a_inf = (&a[exp_high : exp_low]) && (a[mant_high: mant_low] == 0);
+    assign b_inf = (&b[exp_high : exp_low]) && (b[mant_high: mant_low] == 0);
 
 endmodule

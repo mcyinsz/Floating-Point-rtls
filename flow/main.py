@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'fp_onecycle_adder'
+    top_module = 'fp_mult_exp_cal'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)
