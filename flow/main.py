@@ -192,7 +192,7 @@ def main():
     """
 
     # get run dir name
-    top_module = 'fp_pipeline_adder'
+    top_module = 'fp_onecycle_adder'
 
     # initialize run_dir
     os.makedirs(RESULT_DIR, exist_ok=True)
