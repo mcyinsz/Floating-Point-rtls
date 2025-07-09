@@ -5,8 +5,16 @@
 modify hardware unit name in `/flow/main.py`:
 
 ``` python
-top_module = 'fp_mult_exp_cal' # e.g. fp32_naive_divider
+top_module = 'fp32_naive_adder'
 ```
+
+* options
+    * fp32_naive_adder
+    * fp32_onecycle_adder
+    * fp32_naive_compare
+    * fp32_naive_divider
+    * fp32_naive_multiplier
+    * fp32_pipeline_adder
 
 then run `/flow/main.py`
 

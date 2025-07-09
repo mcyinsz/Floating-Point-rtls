@@ -1,4 +1,4 @@
-module float_max (
+module fp32_naive_compare (
     input [31:0] a,      
     input [31:0] b,      
     output reg [31:0] max
